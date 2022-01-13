@@ -58,7 +58,7 @@ class EmailFragment: Fragment() {
                     .replace(R.id.fragment_container_view, PasswordFragment::class.java, bundle)
                     .addToBackStack(null)
                     .commit()
-            }
+            }s
         }
     }
         // Set binding to null to release resource for garbage collection.

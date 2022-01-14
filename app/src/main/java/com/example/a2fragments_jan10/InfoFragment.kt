@@ -24,11 +24,19 @@ class InfoFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
+            // Put the user data back in the EditText
+            val bundle = Bundle()
+            bundle.putString("Email", arguments?.getString("Email") ?: "Email")
+            bundle.putString("Password", arguments?.getString("Password") ?: "Password")
+
             // Data in fragment manager is arguments instead of intent.
-            firstNameTv.text = arguments?.getString("First") ?: "First"
-            lastNameTv.text = arguments?.getString("Last") ?: "Last"
-            emailTv.text = arguments?.getString("Email") ?: "Email"
-            passwordTv.text = arguments?.getString("Password") ?: "Passwords"
+            doneBtn.setOnClickListener{
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container_view, FormFragment::class.java, bundle)
+                    .addToBackStack(null)
+                    .commit()
+
+            }
         }
     }
 
@@ -36,5 +44,4 @@ class InfoFragment: Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 }

@@ -1,48 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:appss="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <LinearLayout android:layout_width="match_parent"
+        android:id="@+id/linearLayout1"
+        android:layout_height="wrap_content"
+        android:weightSum="14">
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/firstNameTv"
+        android:id="@+id/titleTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?textAppearanceHeadline2"
-        app:layout_constraintBottom_toTopOf="@id/lastNameTv"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/lastNameTv"
+        android:textAppearance="?textAppearanceHeadline4"
+        android:text="@string/title"
+        android:layout_weight="7"/>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/doneBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?textAppearanceHeadline2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/firstNameTv" />
-
+        android:textAppearance="?textAppearanceHeadline4"
+        android:text="@string/done"
+        android:layout_weight="7"/>
+    </LinearLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/emailTv"
+        android:id="@+id/mainMailboxesTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?textAppearanceHeadline2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lastNameTv" />
+        android:textAppearance="?textAppearanceHeadline4"
+        android:text="@string/main_mailboxes"
+        app:layout_constraintLeft_toLeftOf="@id/inboxGroup"
+        app:layout_constraintBottom_toTopOf="@id/inboxGroup" />
+        <RadioGroup
+            android:id="@+id/inboxGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/mainMailboxesTv"
+            android:layout_alignLeft="@+id/mainMailboxesTv">
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/inboxesBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/inboxes"/>
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/iCloudBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/iCloud"/>
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/gmailBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/gmail"/>
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/hotmailBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hotmail"/>
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/vipBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/vip"/>
+        </RadioGroup>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/passwordTv"
+        android:id="@+id/specialTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?textAppearanceHeadline2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/emailTv" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:text="@string/special"
+        android:textAppearance="?textAppearanceHeadline4" />
+    <RadioGroup
+        android:id="@+id/specialGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/mainMailboxesTv"
+        android:layout_alignLeft="@+id/mainMailboxesTv">
+    <com.google.android.material.radiobutton.MaterialRadioButton
+        android:id="@+id/secureBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/secure"/>
+    <com.google.android.material.radiobutton.MaterialRadioButton
+        android:id="@+id/notificationsBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/notifications"/>
+    </RadioGroup>
+</LinearLayout>

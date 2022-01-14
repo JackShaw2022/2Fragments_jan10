@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import com.example.a2fragments_jan10.databinding.FragmentFormBinding
@@ -18,6 +19,10 @@ class FormFragment : Fragment() {
     // !! asserting non null, don't do too often can cause NPE(null pointer exception)
     private val binding: FragmentFormBinding get() = _binding!!
 
+    // Instantiate the sign in fields.
+    private var email = ""
+    private var password = ""
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -30,7 +35,7 @@ class FormFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
-            firstNameEt.editText?.addTextChangedListener { text ->
+            emailEt.editText?.addTextChangedListener { text ->
                 Log.d(TAG, text.toString())
 
                 nextBtn.isEnabled = text.toString().length > 8
@@ -38,21 +43,32 @@ class FormFragment : Fragment() {
 
             nextBtn.setOnClickListener {
                 Log.d(TAG, "nexBtn Clicked")
-                // Create bundle to pass data in fragment transaction.
-                val firstName = firstNameEt.editText?.text.toString()
-                val lastName = lastNameEt.editText?.text.toString()
-                val bundle = Bundle()
-                bundle.putString("First", firstName)
-                bundle.putString("Last", lastName)
 
-                Log.d(TAG, "firstName is $firstName, last name is $lastName")
+                email = emailEt.editText?.text.toString()
+                password = passwordEt.editText?.text.toString()
 
-                // FragmentManger allows us to perform transaction.
-                // Use replace to switch between fragments.
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_view, EmailFragment::class.java, bundle)
-                    .addToBackStack(null)
-                    .commit()
+                // Verify the user's credentials
+                if(email != "john@mymail.com") {
+                    Toast.makeText(context,"Email wrong: john@mymail.com \n Password wrong: 123456",Toast.LENGTH_SHORT).show()
+                }
+                else if (password != "123456"){
+                    Toast.makeText(context, "Email wrong: john@mymail.com \n Password wrong: 123456", Toast.LENGTH_LONG).show()
+                }
+                else{
+                    // Create bundle to pass data in fragment transaction.
+                    val bundle = Bundle()
+                    bundle.putString("Email", email)
+                    bundle.putString("Password", password)
+
+                    Log.d(TAG, "email is $email, password is $password")
+
+                    // FragmentManger allows us to perform transaction.
+                    // Use replace to switch between fragments.
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container_view, InfoFragment::class.java, bundle)
+                        .addToBackStack(null)
+                        .commit()
+                }
             }
         }
     }
